@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${person.getFull_name()}">Person</title>
+</head>
+<body>
+<p th:text="${person.getFull_name()} + ', ' + ${person.getAge_birth()}">NameANDAge</p>
+</body>
+<hr/>
+<p>Books:</p>
+<div th:if="${books.isEmpty()}">
+    <p style="color: green" th:text="${person.getFull_name()} + ' have not books'">text</p>
+</div>
+
+<div th:if="${!books.isEmpty()}"  th:each="book : ${books}">
+    <a style="color: darkblue" th:href="@{/book/{id}(id=${book.getId_book()})}"
+        th:text="${book.getName_book() + ', ' + book.getAuthor_book() + ', ' + book.getYear_release()}">Book</a>
+</div>
+<hr/>
+<form th:method="GET" th:action="@{/person/{id}/edit(id=${person.getId_person()})}">
+    <input style="color: coral" type="submit" value="Edit a person">
+</form>
+<br/>
+<form th:method="DELETE" th:action="@{/person/{id}(id=${person.getId_person()})}">
+    <input style="color: red" type="submit" value="Delete a person">
+</form>
+<br/>
+<form th:method="GET" th:action="@{/person}">
+    <input style="color: black" type="submit" value=">>BACK<<">
+</form>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Edit ' + ${book.getName_book()}" >Title</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/book/{id}(id=${book.getId_book()})}" th:object="${book}">
+  <label for="name">Enter book name: </label>
+  <input type="text" th:field="*{name_book}" id="name"/>
+  <div style="color: red" th:if="${#fields.hasErrors('name_book')}" th:errors="*{name_book}">Error for field name_book</div>
+  <br/>
+  <label for="author">Enter author name: </label>
+  <input type="text" th:field="*{author_book}" id="author"/>
+  <div style="color: red" th:if="${#fields.hasErrors('author_book')}" th:errors="*{author_book}">Error for field author_name</div>
+  <br/>
+  <label for="year">Enter year release of this book: </label>
+  <input type="text" th:field="*{year_release}" id="year"/>
+  <div style="color: red" th:if="${#fields.hasErrors('year_release')}" th:errors="*{year_release}">Error for field year+release</div>
+  <br/>
+  <input style="color: green" type="submit" value="Update a book!"/>
+</form>
+<br/>
+<form th:method="GET" th:action="@{/book/{id}(id=${book.getId_book()})}">
+  <input style="color: black" type="submit" value=">>BACK<<">
+</form>
+
+</body>
+</html>
